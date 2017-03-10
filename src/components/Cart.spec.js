@@ -24,18 +24,18 @@ const setup = (total, products = []) => {
 
 describe('Cart component', () => {
   it('should display total', () => {
-    const { p } = setup('76')
+    const p = setup('76')
     expect(p.text()).toMatch(/^Total: \$76/)
   })
 
   it('should display add some products message', () => {
     const { em } = setup()
-    expect(em.text()).toMatch(/^Please add some products to cart/)
+    expect(em.text).toMatch(/^Please add some products to cart/)
   })
 
   it('should disable button', () => {
     const { button } = setup()
-    expect(button.prop('disabled')).toEqual('disabled')
+    expect(button.props('disabled')).toEqual('disabled')
   })
 
   describe('when given product', () => {
@@ -43,7 +43,7 @@ describe('Cart component', () => {
       {
         id: 1,
         title: 'Product 1',
-        price: 9.99,
+        price: '9.99',
         quantity: 1
       }
     ]
@@ -56,12 +56,12 @@ describe('Cart component', () => {
         quantity: product[0].quantity
       }
 
-      expect(products.at(0).props()).toEqual(props)
+      expect(products.at(0).props()).toBe(props)
     })
 
     it('should not disable button', () => {
       const { button } = setup('9.99', product)
-      expect(button.prop('disabled')).toEqual('')
+      expect(button.prop('disabled')).toEqual(undefined)
     })
 
     it('should call action on button click', () => {
