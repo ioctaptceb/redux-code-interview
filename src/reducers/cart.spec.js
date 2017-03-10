@@ -7,6 +7,11 @@ describe('reducers', () => {
       quantityById: {}
     }
 
+    const addedState = {
+      addedIds: [1],
+      quantityById: { 1: 1 }
+    }
+
     it('should provide the initial state', () => {
       expect(cart(undefined, {})).toEqual(initialState)
     })
@@ -23,6 +28,13 @@ describe('reducers', () => {
       expect(cart(initialState, { type: 'ADD_TO_CART', productId: 1 })).toEqual({
         addedIds: [ 1 ],
         quantityById: { 1: 1 }
+      })
+    })
+
+    it('should handle REMOVE_FROM_CART action', () => {
+      expect(cart(addedState, { type: 'REMOVE_FROM_CART', productId: 1 })).toEqual({
+        addedIds: [],
+        quantityById: {}
       })
     })
 
